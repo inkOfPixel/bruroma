@@ -33,6 +33,7 @@ a:hover {
   			transition: color .25s;
 }
 
+
 b{
 	color: #0071bb;
 }
@@ -416,6 +417,14 @@ b{
 
 #footer .description-section{
 	color: #fff;
+}
+
+#footer a {
+	color: #fff;
+}
+
+#footer a:hover {
+	color:#0071bb;
 }
 
 #footer-logo{
