@@ -109,12 +109,10 @@ b{
 	position: fixed;
 	top: 15px;
 	left: 15px;
-	/*background-image: url(../img/logo-icon-light.svg);*/
 	display: none;
 }
 
 #logo.large{
-	/*background-image: url(../img/logo-icon-light.svg);*/
 	display: none;
 }
 
