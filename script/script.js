@@ -21,12 +21,12 @@ $(document).scroll(function() {
 // resize video header
 $(window).resize(function() {
     resizeBackgroundVideo();
-    paddingWrapper();
+    //paddingWrapper();
 });
 
 $(document).ready(function() {
     resizeBackgroundVideo();
-    paddingWrapper();
+    //paddingWrapper();
 });
 
 function resizeBackgroundVideo() {
@@ -54,7 +54,7 @@ var onMapMouseleaveHandler = function (event) {
     that.on('click', onMapClickHandler);
     that.off('mouseleave', onMapMouseleaveHandler);
     that.find('iframe').css("pointer-events", "none");
-}
+};
 
 var onMapClickHandler = function (event) {
     var that = $(this);
@@ -67,15 +67,17 @@ var onMapClickHandler = function (event) {
 
     // Handle the mouse leave event
     that.on('mouseleave', onMapMouseleaveHandler);
-}
+};
 
 // Enable map zooming with mouse scroll when the user clicks the map
 $('.maps.embed-container').on('click', onMapClickHandler);
 
-
-function paddingWrapper() {
-    var wwrapper = $('.wrapper').width();
-    var wrapper = $(".wrapper");
-
-    wrapper.css("padding-left", -(wwrapper/2 );
-}
+//
+//function paddingWrapper() {
+//    var wrapper = $(".wrapper");
+//
+//    wrapper.each(function() {
+//	    //debugger;
+//	   $(this).css("padding-left", -(wrapper.width() / 2 ) + "px");
+//    });
+//}

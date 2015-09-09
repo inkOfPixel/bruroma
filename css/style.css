@@ -12,6 +12,17 @@ html {
 	overflow-x: hidden;
 }
 
+h1, h2, h3 {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#working h3 {
+	color: #0071bb;
+	font-size: 16px;
+}
+
 a {
   color: #333;
   text-decoration: none; /* no underline */
@@ -209,13 +220,14 @@ b{
 	text-align: right;
 	color: #fff;
 	font-size: 12px;
-	letter-spacing: 0.2em;
+	letter-spacing: 2px;
 	font-family: 'Avenir', sans-serif;
 	font-weight: 400;
 }
 
-#phone.large{
+#phone.large {
 	color: #fff;
+	/*font-weight: 600;*/
 }
 
 #phone.small{
@@ -284,22 +296,23 @@ b{
 }
 
 #header-logo{
-	background-image: url('../img/logo-text.svg') ;
+
 	height: 60px;
 	background-size: 533px 60px;
-	background-position: center;
-	background-repeat: no-repeat;
+	background: url('../img/logo-text.svg') no-repeat center;
 	width: 100%;
 	position: fixed;
 	top: 270px;
+	z-index: -1;
 }
 .first-section{
 	margin-top: -60px;
 }
 .section{
 	float: left;
-	width: 120%;
-	margin-left: -10%;
+	width: 200%;
+	margin-left: -50%;
+	padding-right: 50%;
 	position: relative;
 	z-index: 100;
 	-ms-transform: rotate(-3.5deg); /* IE 9 */
@@ -310,15 +323,15 @@ b{
 }
 
 .inner-section{
-	-ms-transform: rotate(3.5deg); /* IE 9 */
-	-webkit-transform: rotate(3.5deg); /* Chrome, Safari, Opera */
-	transform: rotate(3.5deg);
+	-ms-transform: rotate(3.5deg) translate(1%); /* IE 9 */
+	-webkit-transform: rotate(3.5deg) translate(1%); /* Chrome, Safari, Opera */
+	transform: rotate(3.5deg) translate(1%);
 }
 
 .title-section{
-	width: 60%;
-	margin-left: 20%;
-	margin-right: 20%;
+	width: 100%;
+	/*margin-left: 20%;*/
+	/*margin-right: 20%;*/
 	margin-top: 60px;
 	font-family: 'Avenir', sans-serif;
 	font-size: 32px;
@@ -338,16 +351,16 @@ b{
 }
 
 .description-section{
-	padding-left: 25%;
-	padding-right: 25%;
-	width: 50%;
+	padding-left: 20%;
+	padding-right: 20%;
+	width: 60%;
 	margin-top: 40px;
 	font-family: 'blender', sans-serif;
 	font-weight: 200;
 	font-size: 16px;
 	letter-spacing: 0.02em;
 	float: left;
-	text-align: center;
+	text-align: justify;
 	margin-bottom: 70px;
 	color: #333333;
 }
@@ -406,10 +419,7 @@ b{
 	width: 60%;
 	float: left;
 	height: 400px;
-	margin-left: 20%;
-	margin-right: 20%;
-	margin-top: -40px;
-	margin-bottom: 60px;
+	margin: -40px 20% 60px;
 }
 
 .overlay-map {
@@ -463,13 +473,18 @@ b{
 	margin-top: -64px;
 }
 
+#footer .description-section {
+	text-align: center;
+}
+
+#contacts .description-section {
+	text-align: center;
+}
+
 @media screen and (max-width: 1050px) {
 
 	#menu ul li a {
-		padding-top: 35px;
-		padding-bottom: 35px;
-		padding-left: 10%;
-		padding-right: 10%;
+		padding: 35px 10%;
 	}
 
 
@@ -477,8 +492,17 @@ b{
 
 @media screen and (max-width: 960px) {
 
+	.inner-section{
+		-ms-transform: rotate(3.5deg) translate(0%); /* IE 9 */
+		-webkit-transform: rotate(3.5deg) translate(0%); /* Chrome, Safari, Opera */
+		transform: rotate(3.5deg) translate(0%);
+	}
+
 	.wrapper{
-		width: 100%;
+		float: left;
+		width: 60%;
+		padding-left: 20%;
+		padding-right: 20%;
 	}
 
 	#contacts-map{
