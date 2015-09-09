@@ -202,7 +202,7 @@ b{
 	top: 32px;
 	right: 15px;
 	text-align: right;
-	color: #fff;
+	color: #ffffff;
 	font-size: 12px;
 	letter-spacing: 2px;
 	font-family: 'Avenir', sans-serif;
@@ -210,7 +210,8 @@ b{
 }
 
 #phone.large {
-	color: #fff;
+	color: #ffffff;
+	font-weight: 400;
 }
 
 #phone.small{
