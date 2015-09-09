@@ -411,6 +411,10 @@ b{
 	background-color: #e6e6e6;
 }
 
+#contacts .section {
+	background-color: white;
+}
+
 #contacts-map{
 	width: 60%;
 	float: left;
