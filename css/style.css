@@ -288,6 +288,20 @@ b{
 .first-section{
 	margin-top: -60px;
 }
+
+.main-section {
+	float: left;
+	width: 100%;
+}
+
+.center-fix {
+	float: left;
+	width: 100%;
+	position: relative;
+	z-index: 100;
+	transform: translate(0.5%);
+}
+
 .section{
 	float: left;
 	width: 120%;
@@ -309,7 +323,7 @@ b{
 }
 
 .title-section{
-	width: 100%;
+	width: 60%;
 	margin-top: 60px;
 	font-family: 'Avenir', sans-serif;
 	font-size: 32px;
@@ -319,6 +333,9 @@ b{
 	float: left;
 	text-transform: uppercase;
 	text-align: center;
+
+	padding-left: 20%;
+	padding-right: 20%;
 }
 
 .line-section{
@@ -491,6 +508,12 @@ b{
 		display: none;
 	}
 
+	#contacts-map iframe {
+		width: 80%;
+		height: 400px;
+		padding-left: 10%;
+		padding-right: 10%;
+	}
 }
 
 @media screen and (max-width: 768px) {
@@ -507,12 +530,6 @@ b{
 		display: none;
 	}
 
-	.description-section{
-		padding-left: 0;
-		padding-right: 0;
-		width: 100%;
-	}
-
 	#header-logo{
 		background-size: 80% 60px;
 	}
@@ -527,10 +544,6 @@ b{
 
 	.title-section{
 		font-size: 20px;
-	}
-
-	.description-section{
-		font-size: 14px;
 	}
 
 	#footer-logo{
@@ -564,13 +577,6 @@ b{
 	.title-section{
 		font-size: 18px;
 		letter-spacing: 0.2em;
-	}
-
-	.description-section{
-		padding-left: 0;
-		padding-right: 0;
-		width: 100%;
-		font-size: 14px;
 	}
 
 	#footer-logo{
