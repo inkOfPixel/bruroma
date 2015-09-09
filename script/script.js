@@ -72,12 +72,3 @@ var onMapClickHandler = function (event) {
 // Enable map zooming with mouse scroll when the user clicks the map
 $('.maps.embed-container').on('click', onMapClickHandler);
 
-//
-//function paddingWrapper() {
-//    var wrapper = $(".wrapper");
-//
-//    wrapper.each(function() {
-//	    //debugger;
-//	   $(this).css("padding-left", -(wrapper.width() / 2 ) + "px");
-//    });
-//}
