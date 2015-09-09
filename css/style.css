@@ -310,9 +310,9 @@ b{
 }
 .section{
 	float: left;
-	width: 200%;
-	margin-left: -50%;
-	padding-right: 50%;
+	width: 120%;
+	margin-left: -10%;
+	padding-right: 10%;
 	position: relative;
 	z-index: 100;
 	-ms-transform: rotate(-3.5deg); /* IE 9 */
@@ -330,8 +330,6 @@ b{
 
 .title-section{
 	width: 100%;
-	/*margin-left: 20%;*/
-	/*margin-right: 20%;*/
 	margin-top: 60px;
 	font-family: 'Avenir', sans-serif;
 	font-size: 32px;
@@ -384,8 +382,8 @@ b{
 
 .section-overlay{
 	float: left;
-	width: 120%;
-	margin-left: -10%;
+	width: 100%;
+	/*margin-left: -10%;*/
 	position: relative;
 	z-index: 100;
 	background-color: rgba(0,0,0,0.6);
