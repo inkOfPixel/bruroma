@@ -78,6 +78,7 @@ export default styled(Section)`
 			}
 		`};
 	transform: skewY(-3.5deg);
+	text-align: justify;
 	padding-top: 60px;
 	padding-bottom: 60px;
 	&:nth-child(odd) {

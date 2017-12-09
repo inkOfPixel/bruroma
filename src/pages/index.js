@@ -5,6 +5,7 @@ import Link from "gatsby-link";
 import styled from "styled-components";
 import Header from "../components/Header";
 import Section from "../components/Section";
+import Map from "../components/Map";
 import logo from "./logo-text.svg";
 import technicalDrawing from "./technical-drawing.jpg";
 import laserCut from "./lasercut.jpg";
@@ -17,9 +18,9 @@ const IndexPage = () => (
 		<Header />
 		<Hero>
 			{/* <YoutubeVideo src="https://www.youtube.com/embed/pqUDw-C0A0M?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1&amp;loop=1&amp;vq=hd1080&amp;playlist=pqUDw-C0A0M" /> */}
-			<HeaderContent>
+			<HeroContent>
 				<Logo src={logo} alt="Bruroma logo" />
-			</HeaderContent>
+			</HeroContent>
 		</Hero>
 		<Content>
 			<Section id="about" title="Chi siamo">
@@ -111,6 +112,20 @@ const IndexPage = () => (
 				estetico disponiamo della strumentazione necessaria per la
 				pulitura e la lucidatura dell' acciaio.
 			</Section>
+			<Section id="contacts" title="Contatti">
+				<Contacts>
+					Bru.ro.ma. srl<br />
+					Via Leonardo Da Vinci, 2<br />
+					31010 Godega di Sant' Urbano (TV)<br />
+					<br />
+					Tel. <b>+39 0438 430376</b>
+					<br />
+					Fax <b>+39 0438 430396</b>
+					<br />
+					Mail <b>info@bruroma.com</b>
+				</Contacts>
+				<Map src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2775.158707111446!2d12.378642099999992!3d45.928127700000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796ca36443939f%3A0xf7a59b680b8f9006!2sBru.ro.ma.+S.r.l.!5e0!3m2!1sen!2sit!4v1441376814275" />
+			</Section>
 		</Content>
 	</div>
 );
@@ -121,13 +136,15 @@ const Hero = styled.header`
 	height: 600px;
 `;
 
-const YoutubeVideo = styled(({ className, src }) => (
+let YoutubeVideo = ({ className, src }) => (
 	<div className={className}>
 		<div className="video-wrapper">
 			<iframe src={src} />
 		</div>
 	</div>
-))`
+);
+
+YoutubeVideo = styled(YoutubeVideo)`
 	background-color: black;
 	height: 600px;
 	left: 0;
@@ -149,7 +166,7 @@ const YoutubeVideo = styled(({ className, src }) => (
 	}
 `;
 
-const HeaderContent = styled.div`
+const HeroContent = styled.div`
 	position: relative;
 	background-color: rgba(0, 0, 10, 0.5);
 	width: 100%;
@@ -166,8 +183,12 @@ const Logo = styled.img`
 
 const Content = styled.main`
 	position: relative;
-	padding-top: 600px;
+	padding-top: 540px;
 	z-index: 20;
+`;
+
+const Contacts = styled.div`
+	text-align: center;
 `;
 
 export default IndexPage;

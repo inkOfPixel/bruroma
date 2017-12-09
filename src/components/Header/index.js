@@ -12,7 +12,7 @@ class Header extends Component {
 		size: "large"
 	};
 	componentDidMount() {
-		document.addEventListener("scroll", throttle(this.handleScroll, 400));
+		document.addEventListener("scroll", throttle(this.handleScroll, 100));
 	}
 
 	handleScroll = event => {
@@ -33,22 +33,22 @@ class Header extends Component {
 		const { size } = this.state;
 		return (
 			<Bar size={size}>
-				<Wrapper>
-					<a href="#home">
-						<Logo src={logo} visible={size === "small"} />
-					</a>
-					<PhoneIcon
-						src={size === "small" ? phoneDark : phoneLight}
-					/>
-					<PhoneNumber size={size}>+39 0438 430376</PhoneNumber>
-					<Navigation>
-						<NavigationLink to="#about">about</NavigationLink>
-						<NavigationLink to="#working">
-							lavorazioni
-						</NavigationLink>
-						<NavigationLink to="#contacts">contatti</NavigationLink>
-					</Navigation>
-				</Wrapper>
+				<a href="#home">
+					<Logo src={logo} visible={size === "small"} />
+				</a>
+				<PhoneIcon src={size === "small" ? phoneDark : phoneLight} />
+				<PhoneNumber size={size}>+39 0438 430376</PhoneNumber>
+				<Navigation>
+					<NavigationLink to="#about" size={size}>
+						about
+					</NavigationLink>
+					<NavigationLink to="#working" size={size}>
+						lavorazioni
+					</NavigationLink>
+					<NavigationLink to="#contacts" size={size}>
+						contatti
+					</NavigationLink>
+				</Navigation>
 			</Bar>
 		);
 	}
@@ -88,11 +88,13 @@ const Wrapper = styled.div`
 				`};
 `;
 
-const Navigation = styled(({ children, className }) => (
+let Navigation = ({ children, className }) => (
 	<nav className={className}>
 		<ul>{children}</ul>
 	</nav>
-))`
+);
+
+Navigation = styled(Navigation)`
 	text-align: center;
 	width: 100%;
 	height: 120px;
@@ -105,13 +107,13 @@ const Navigation = styled(({ children, className }) => (
 	}
 `;
 
-const Link = ({ children, className, to }) => (
+let NavigationLink = ({ children, className, to }) => (
 	<li className={className}>
 		<a href={to}>{children}</a>
 	</li>
 );
 
-const NavigationLink = styled(Link)`
+NavigationLink = styled(NavigationLink)`
 	display: inline-block;
 	padding: 0;
 	& a {
@@ -150,10 +152,10 @@ const PhoneIcon = styled.img`
 	height: 36px;
 `;
 
-const PhoneNumber = styled.p`
+const PhoneNumber = styled.span`
 	height: 50px;
 	position: fixed;
-	top: 32px;
+	top: 35px;
 	right: 15px;
 	text-align: right;
 	color: ${({ size }) => (size === "small" ? "#333" : "#fff")};
