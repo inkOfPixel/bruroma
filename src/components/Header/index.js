@@ -54,7 +54,13 @@ class Header extends Component {
 	}
 }
 
-const Bar = styled.div`
+let Bar = ({ children, size, ...other }) => (
+	<div {...other}>
+		<Wrapper size={size}>{children}</Wrapper>
+	</div>
+);
+
+Bar = styled(Bar)`
 	width: 100%;
 	background-color: ${({ size }) =>
 		size === "large" ? "rgba(0, 0, 0, 0)" : "rgba(255, 255, 255, 0.93)"};
