@@ -1,0 +1,38 @@
+@font-face {
+	font-family: blender;
+	src: url(./BlenderBook.otf);
+}
+
+body {
+	font-family: "blender", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+a {
+	color: #333;
+	text-decoration: none; /* no underline */
+	-webkit-transition: color 0.25s;
+	-moz-transition: color 0.25s;
+	-o-transition: color 0.25s;
+	transition: color 0.25s;
+}
+
+a:hover {
+	color: #0071bb;
+	text-decoration: none; /* no underline */
+	-webkit-transition: color 0.25s;
+	-moz-transition: color 0.25s;
+	-o-transition: color 0.25s;
+	transition: color 0.25s;
+}
+
+b {
+	color: #0071bb;
+}
