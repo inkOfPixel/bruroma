@@ -105,6 +105,9 @@ Navigation = styled(Navigation)`
 		line-height: 1;
 		display: block;
 	}
+	@media (max-width: 880px) {
+		display: none;
+	}
 `;
 
 let NavigationLink = ({ children, className, to }) => (

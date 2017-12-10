@@ -9,16 +9,43 @@ type Props = {
 	title: string
 };
 
-const Section = ({ backgroundImage, children, title, ...other }: Props) => (
-	<section {...other}>
+const Section = ({ backgroundImage, children, title }: Props) => (
+	<Wrapper backgroundImage={backgroundImage}>
 		<StyledTitle inverse={typeof backgroundImage === "string"}>
 			{title}
 		</StyledTitle>
 		<Content inverse={typeof backgroundImage === "string"}>
 			{children}
 		</Content>
-	</section>
+	</Wrapper>
 );
+
+const Wrapper = styled.section`
+	background-color: white;
+	${({ backgroundImage }) =>
+		backgroundImage &&
+		css`
+			background-image: url(${backgroundImage});
+			background-position: center;
+			background-size: cover;
+			&:before {
+				position: absolute;
+				background-color: rgba(0, 0, 0, 0.7);
+				content: "";
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+		`};
+	transform: skewY(-3.5deg);
+	text-align: justify;
+	padding-top: 60px;
+	padding-bottom: 60px;
+	&:nth-child(odd) {
+		background-color: #e6e6e6;
+	}
+`;
 
 const Title = ({ children, inverse, ...other }) => (
 	<h2 {...other}>
@@ -45,6 +72,22 @@ const StyledTitle = styled(Title)`
 				padding-bottom: 8px;
 			`};
 	}
+	@media (max-width: 768px) {
+		& span {
+			font-size: 24px;
+		}
+	}
+	@media (max-width: 500px) {
+		& span {
+			font-size: 20px;
+		}
+	}
+	@media (max-width: 360px) {
+		& span {
+			font-size: 18px;
+			letter-spacing: 0.2em;
+		}
+	}
 `;
 
 const Content = styled.div`
@@ -57,31 +100,9 @@ const Content = styled.div`
 	width: 600px;
 	margin-left: auto;
 	margin-right: auto;
-`;
-
-export default styled(Section)`
-	background-color: white;
-	${({ backgroundImage }) =>
-		backgroundImage &&
-		css`
-			background-image: url(${backgroundImage});
-			background-position: center;
-			background-size: cover;
-			&:before {
-				position: absolute;
-				background-color: rgba(0, 0, 0, 0.7);
-				content: "";
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-			}
-		`};
-	transform: skewY(-3.5deg);
-	text-align: justify;
-	padding-top: 60px;
-	padding-bottom: 60px;
-	&:nth-child(odd) {
-		background-color: #e6e6e6;
+	@media (max-width: 768px) {
+		width: 80%;
 	}
 `;
+
+export default Section;

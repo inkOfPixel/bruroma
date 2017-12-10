@@ -37,6 +37,11 @@ const Logo = styled.img`
 	top: 270px;
 	height: 60px;
 	width: 100%;
+	@media (max-width: 768px) {
+		width: 80%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 `;
 
 export default Hero;
