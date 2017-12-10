@@ -6,7 +6,8 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import Section from "../components/Section";
 import Map from "../components/Map";
-import logo from "./logo-text.svg";
+import Hero from "../components/Hero";
+import Footer from "../components/Footer";
 import technicalDrawing from "./technical-drawing.jpg";
 import laserCut from "./lasercut.jpg";
 import punching from "./punching.jpg";
@@ -16,12 +17,7 @@ import welding from "./welding.jpg";
 const IndexPage = () => (
 	<div>
 		<Header />
-		<Hero>
-			{/* <YoutubeVideo src="https://www.youtube.com/embed/pqUDw-C0A0M?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1&amp;loop=1&amp;vq=hd1080&amp;playlist=pqUDw-C0A0M" /> */}
-			<HeroContent>
-				<Logo src={logo} alt="Bruroma logo" />
-			</HeroContent>
-		</Hero>
+		<Hero />
 		<Content>
 			<Section id="about" title="Chi siamo">
 				Situata nel nord est Italia, Bruroma é un' azienda leader nella
@@ -127,63 +123,14 @@ const IndexPage = () => (
 				<Map src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2775.158707111446!2d12.378642099999992!3d45.928127700000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796ca36443939f%3A0xf7a59b680b8f9006!2sBru.ro.ma.+S.r.l.!5e0!3m2!1sen!2sit!4v1441376814275" />
 			</Section>
 		</Content>
+		<Footer />
 	</div>
 );
-
-const Hero = styled.header`
-	position: fixed;
-	width: 100%;
-	height: 600px;
-`;
-
-let YoutubeVideo = ({ className, src }) => (
-	<div className={className}>
-		<div className="video-wrapper">
-			<iframe src={src} />
-		</div>
-	</div>
-);
-
-YoutubeVideo = styled(YoutubeVideo)`
-	background-color: black;
-	height: 600px;
-	left: 0;
-	overflow: hidden;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	& .video-wrapper {
-		height: 800px;
-		margin-top: -100px;
-		position: relative;
-		& iframe {
-			height: 100%;
-			left: 0;
-			position: absolute;
-			top: 0;
-			width: 100%;
-		}
-	}
-`;
-
-const HeroContent = styled.div`
-	position: relative;
-	background-color: rgba(0, 0, 10, 0.5);
-	width: 100%;
-	height: 600px;
-	z-index: 10;
-`;
-
-const Logo = styled.img`
-	position: fixed;
-	top: 270px;
-	height: 60px;
-	width: 100%;
-`;
 
 const Content = styled.main`
 	position: relative;
 	padding-top: 540px;
+	padding-bottom: 400px;
 	z-index: 20;
 `;
 
