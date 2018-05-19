@@ -1,31 +1,32 @@
 {
-	"name": "bruroma",
-	"description": "Bruroma website",
-	"version": "2.0.0",
-	"author": "Massimo De Marchi <massimodemarchi91@gmail.com>",
-	"dependencies": {
-		"gatsby": "^1.9.127",
-		"gatsby-link": "^1.6.30",
-		"gatsby-plugin-react-helmet": "^1.0.8",
-		"gatsby-plugin-styled-components": "2.0.3",
-		"lodash": "4.17.4",
-		"normalize.css": "7.0.0",
-		"styled-components": "2.2.4"
-	},
-	"keywords": [
-		"gatsby"
-	],
-	"license": "MIT",
-	"main": "n/a",
-	"scripts": {
-		"build": "gatsby build",
-		"develop": "gatsby develop",
-		"format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"devDependencies": {
-		"babel-preset-flow": "6.23.0",
-		"flow-bin": "0.60.1",
-		"prettier": "^1.8.2"
-	}
+  "name": "bruroma",
+  "description": "Bruroma website",
+  "version": "2.0.0",
+  "author": "Massimo De Marchi <massimodemarchi91@gmail.com>",
+  "dependencies": {
+    "gatsby": "1.9.127",
+    "gatsby-link": "1.6.30",
+    "gatsby-plugin-netlify-cms": "2.0.1",
+    "gatsby-plugin-react-helmet": "1.0.8",
+    "gatsby-plugin-styled-components": "2.0.3",
+    "lodash": "4.17.4",
+    "normalize.css": "7.0.0",
+    "styled-components": "2.2.4"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "main": "n/a",
+  "scripts": {
+    "build": "gatsby build",
+    "dev": "gatsby develop",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "babel-preset-flow": "6.23.0",
+    "flow-bin": "0.60.1",
+    "prettier": "^1.8.2"
+  }
 }
