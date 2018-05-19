@@ -4,14 +4,17 @@
   "version": "2.0.0",
   "author": "Massimo De Marchi <massimodemarchi91@gmail.com>",
   "dependencies": {
-    "gatsby": "1.9.127",
-    "gatsby-link": "1.6.30",
+    "gatsby": "1.9.261",
+    "gatsby-cli": "1.1.52",
+    "gatsby-link": "1.6.44",
     "gatsby-plugin-netlify-cms": "2.0.1",
-    "gatsby-plugin-react-helmet": "1.0.8",
-    "gatsby-plugin-styled-components": "2.0.3",
-    "lodash": "4.17.4",
-    "normalize.css": "7.0.0",
-    "styled-components": "2.2.4"
+    "gatsby-plugin-react-helmet": "2.0.11",
+    "gatsby-plugin-styled-components": "2.0.11",
+    "lodash": "4.17.10",
+    "netlify-cms": "1.8.0",
+    "normalize.css": "8.0.0",
+    "react-helmet": "5.2.0",
+    "styled-components": "3.2.6"
   },
   "keywords": [
     "gatsby"
@@ -26,7 +29,7 @@
   },
   "devDependencies": {
     "babel-preset-flow": "6.23.0",
-    "flow-bin": "0.60.1",
-    "prettier": "^1.8.2"
+    "flow-bin": "0.72.0",
+    "prettier": "^1.12.1"
   }
 }
