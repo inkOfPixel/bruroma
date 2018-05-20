@@ -2,20 +2,26 @@
 
 import React, { type Node } from "react";
 import styled, { css } from "styled-components";
+import ScrollableAnchor from "react-scrollable-anchor";
 
 type Props = {
   backgroundImage?: string,
   children: Node,
+  id: string,
   title: string
 };
 
-const Section = ({ backgroundImage, children, title }: Props) => (
-  <Wrapper backgroundImage={backgroundImage}>
-    <StyledTitle inverse={typeof backgroundImage === "string"}>
-      {title}
-    </StyledTitle>
-    <Content inverse={typeof backgroundImage === "string"}>{children}</Content>
-  </Wrapper>
+const Section = ({ backgroundImage, children, id, title }: Props) => (
+  <ScrollableAnchor id={id}>
+    <Wrapper backgroundImage={backgroundImage}>
+      <StyledTitle inverse={typeof backgroundImage === "string"}>
+        {title}
+      </StyledTitle>
+      <Content inverse={typeof backgroundImage === "string"}>
+        {children}
+      </Content>
+    </Wrapper>
+  </ScrollableAnchor>
 );
 
 const Wrapper = styled.section`
