@@ -21,9 +21,10 @@
     "paths": {
       "@layouts": ["layouts"],
       "@layouts/*": ["layouts/*"],
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@assets/*": ["assets/*"]
     }
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "@types/index.d.ts"]
 }
