@@ -28,7 +28,7 @@ export const links: LinkGroup[] = [
           </LightMode>
         ),
       },
-      { label: "Press", href: "#" },
+      { label: "News", href: "#" },
     ],
   },
   {

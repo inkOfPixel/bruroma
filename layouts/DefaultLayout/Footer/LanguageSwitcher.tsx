@@ -1,10 +1,10 @@
-import { FormControl, FormLabel, Select } from '@chakra-ui/react'
-import * as React from 'react'
+import { FormControl, FormLabel, Select } from "@chakra-ui/react";
+import * as React from "react";
 
 export const LanguageSwitcher = () => (
   <FormControl w="auto" display="flex" alignItems="center">
     <FormLabel mb="1" fontSize="sm" fontWeight="normal">
-      Language & region:
+      Lingua:
     </FormLabel>
     <Select
       w="120px"
@@ -16,11 +16,9 @@ export const LanguageSwitcher = () => (
       name="lang"
       defaultValue="English (UK)"
     >
-      <option value="Français">Français</option>
       <option value="Deutsch">Deutsch</option>
-      <option value="English (UK)">English (UK)</option>
-      <option value="English (EU)">English (EU)</option>
-      <option value="English (US)">English (US)</option>
+      <option value="English (UK)">English</option>
+      <option value="English (EU)">Italiano</option>
     </Select>
   </FormControl>
-)
+);

@@ -16,6 +16,7 @@ import { NavMenu } from "./NavMenu";
 import { Submenu } from "./Submenu";
 import { ToggleButton } from "./ToggleButton";
 import { links } from "./_data";
+import { HiPhone } from "react-icons/hi";
 
 const MobileNavContent = (props: FlexProps) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -27,15 +28,20 @@ const MobileNavContent = (props: FlexProps) => {
         className="nav-content__mobile"
         {...props}
       >
-        <Box flexBasis="6rem">
-          <ToggleButton isOpen={isOpen} onClick={onToggle} />
-        </Box>
-        <Box as="a" rel="home" mx="auto">
-          <Icon as={Logo} color="blue.500" h="20px" w="100px" />
-        </Box>
+        <HStack>
+          <Box flexBasis="6rem">
+            <ToggleButton isOpen={isOpen} onClick={onToggle} />
+          </Box>
+          <Box as="a" rel="home">
+            <VisuallyHidden>Bruroma</VisuallyHidden>
+            <HStack>
+              <Icon as={Wordmark} color="blue.500" h="20px" w="unset" />
+            </HStack>
+          </Box>
+        </HStack>
         <Box visibility={{ base: "hidden", sm: "visible" }}>
-          <Button as="a" colorScheme="blue">
-            Get Started
+          <Button as="a" leftIcon={<HiPhone />} colorScheme="blue">
+            +39 0438 430376
           </Button>
         </Box>
       </Flex>
@@ -49,9 +55,6 @@ const MobileNavContent = (props: FlexProps) => {
             </NavLink.Mobile>
           )
         )}
-        <Button colorScheme="blue" w="full" size="lg" mt="5">
-          Try for free
-        </Button>
       </NavMenu>
     </>
   );
@@ -68,8 +71,8 @@ const DesktopNavContent = (props: FlexProps) => {
       <Box as="a" href="#" rel="home">
         <VisuallyHidden>Bruroma</VisuallyHidden>
         <HStack>
-          <Icon as={Logo} color="blue.500" h="40px" w="unset" />
-          <Icon as={Wordmark} color="blue.500" h="20px" w="unset" />
+          <Icon as={Logo} color="white" h="40px" w="unset" />
+          {/* <Icon as={Wordmark} color="blue.500" h="20px" w="unset" /> */}
         </HStack>
       </Box>
       <HStack
@@ -88,17 +91,9 @@ const DesktopNavContent = (props: FlexProps) => {
           </Box>
         ))}
       </HStack>
-      <HStack spacing="8" minW="240px" justify="space-between">
-        <Box
-          as="a"
-          href="#"
-          color={mode("blue.600", "blue.300")}
-          fontWeight="bold"
-        >
-          Sign In
-        </Box>
-        <Button as="a" href="#" colorScheme="blue" fontWeight="bold">
-          Chiamaci
+      <HStack spacing="8" justify="space-between">
+        <Button as="a" leftIcon={<HiPhone />} colorScheme="gray">
+          +39 0438 430376
         </Button>
       </HStack>
     </Flex>

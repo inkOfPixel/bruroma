@@ -18,7 +18,7 @@ import { footerLinks, links, socialLinks } from "./_data";
 
 export function Footer() {
   return (
-    <Box as="footer" bg="blue.600" color="white" py="64px">
+    <Box as="footer" color="white" py="64px">
       <Box maxW="7xl" px="8" mx="auto">
         <Flex
           direction={{ base: "column", lg: "row" }}
@@ -44,7 +44,7 @@ export function Footer() {
           <SimpleGrid
             w="full"
             maxW={{ base: "unset", lg: "3xl" }}
-            columns={{ base: 2, lg: 4 }}
+            columns={{ base: 1, sm: 2, lg: 4 }}
             spacing={{ base: "8", md: "4" }}
             fontSize="sm"
           >
@@ -75,7 +75,7 @@ export function Footer() {
             ))}
           </SimpleGrid>
         </Flex>
-        <Divider my="10" borderColor="blue.300" />
+        <Divider my="10" borderColor="gray.800" />
         <Flex
           direction={{ base: "column-reverse", lg: "row" }}
           align={{ base: "flex-start", lg: "center" }}

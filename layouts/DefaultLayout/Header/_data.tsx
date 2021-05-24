@@ -46,4 +46,5 @@ export const links: Link[] = [
     ],
   },
   { label: "Settori", href: "#" },
+  { label: "Materiali", href: "#" },
 ];

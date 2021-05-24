@@ -22,7 +22,8 @@
       "@layouts": ["layouts"],
       "@layouts/*": ["layouts/*"],
       "@components/*": ["components/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@theme": ["theme"]
     }
   },
   "exclude": ["node_modules"],
