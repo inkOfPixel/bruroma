@@ -9,11 +9,16 @@ import { Link } from "./_data";
 
 interface SubmenuProps {
   link: Link;
+  onOpen: () => void;
+  onClose: () => void;
 }
 
 const DesktopSubmenu = (props: SubmenuProps) => {
   const { link } = props;
-  const { isOpen, getMenuProps, getTriggerProps } = useNavMenu();
+  const { isOpen, getMenuProps, getTriggerProps } = useNavMenu({
+    onOpen: props.onOpen,
+    onClose: props.onClose,
+  });
   return (
     <>
       <NavLink.Desktop

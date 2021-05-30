@@ -14,14 +14,14 @@ export const NavMenu = React.forwardRef<HTMLDivElement, MotionBoxProps>(
       zIndex="10"
       sx={{ "--chakra-backdrop-blur": "blur(8px)" }}
       backdropFilter="auto"
-      bg={useColorModeValue("white", "rgba(24,24,27,0.5)")}
+      bg={useColorModeValue("white", "gray.800")}
       w="full"
       shadow="lg"
       px="4"
       pos="absolute"
       insetX="0"
       pt="6"
-      pb="12"
+      pb="6"
       ref={ref}
       {...props}
     />

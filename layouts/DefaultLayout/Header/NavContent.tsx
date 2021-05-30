@@ -6,19 +6,27 @@ import {
   FlexProps,
   HStack,
   Icon,
-  useColorModeValue as mode,
   useDisclosure,
   VisuallyHidden,
 } from "@chakra-ui/react";
 import * as React from "react";
+import { HiPhone } from "react-icons/hi";
 import { NavLink } from "./NavLink";
 import { NavMenu } from "./NavMenu";
 import { Submenu } from "./Submenu";
 import { ToggleButton } from "./ToggleButton";
 import { links } from "./_data";
-import { HiPhone } from "react-icons/hi";
 
-const MobileNavContent = (props: FlexProps) => {
+export interface NavContentProps extends FlexProps {
+  onSubmenuOpen: () => void;
+  onSubmenuClose: () => void;
+}
+
+const MobileNavContent = ({
+  onSubmenuClose,
+  onSubmenuOpen,
+  ...flexProps
+}: NavContentProps) => {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <>
@@ -26,7 +34,7 @@ const MobileNavContent = (props: FlexProps) => {
         align="center"
         justify="space-between"
         className="nav-content__mobile"
-        {...props}
+        {...flexProps}
       >
         <HStack>
           <Box flexBasis="6rem">
@@ -48,7 +56,12 @@ const MobileNavContent = (props: FlexProps) => {
       <NavMenu animate={isOpen ? "open" : "closed"}>
         {links.map((link, idx) =>
           link.children ? (
-            <Submenu.Mobile key={idx} link={link} />
+            <Submenu.Mobile
+              key={idx}
+              link={link}
+              onOpen={onSubmenuOpen}
+              onClose={onSubmenuClose}
+            />
           ) : (
             <NavLink.Mobile key={idx} href={link.href}>
               {link.label}
@@ -60,13 +73,17 @@ const MobileNavContent = (props: FlexProps) => {
   );
 };
 
-const DesktopNavContent = (props: FlexProps) => {
+const DesktopNavContent = ({
+  onSubmenuOpen,
+  onSubmenuClose,
+  ...flexProps
+}: NavContentProps) => {
   return (
     <Flex
       className="nav-content__desktop"
       align="center"
       justify="space-between"
-      {...props}
+      {...flexProps}
     >
       <Box as="a" href="#" rel="home">
         <VisuallyHidden>Bruroma</VisuallyHidden>
@@ -84,7 +101,11 @@ const DesktopNavContent = (props: FlexProps) => {
         {links.map((link, idx) => (
           <Box as="li" key={idx} id={`nav__menuitem-${idx}`}>
             {link.children ? (
-              <Submenu.Desktop link={link} />
+              <Submenu.Desktop
+                link={link}
+                onOpen={onSubmenuOpen}
+                onClose={onSubmenuClose}
+              />
             ) : (
               <NavLink.Desktop href={link.href}>{link.label}</NavLink.Desktop>
             )}
