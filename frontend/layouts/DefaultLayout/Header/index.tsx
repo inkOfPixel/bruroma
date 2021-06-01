@@ -8,9 +8,6 @@ import { NavContent } from "./NavContent";
 
 export function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  React.useEffect(() => {
-    console.log("isOpen", isOpen);
-  }, [isOpen]);
   return (
     <Box
       as="header"

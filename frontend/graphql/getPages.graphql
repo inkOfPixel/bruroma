@@ -1,0 +1,35 @@
+query getPages(
+  $where: JSON
+  $locale: String
+  $publicationState: PublicationState
+) {
+  pages(where: $where, locale: $locale, publicationState: $publicationState) {
+    id
+    locale
+    created_at
+    updated_at
+    title
+    path
+    sections {
+      __typename
+      ... on ComponentSectionHero {
+        id
+        title
+        description
+        callToAction {
+          id
+          title
+          url
+        }
+        image {
+          id
+          name
+          alternativeText
+          width
+          height
+          url
+        }
+      }
+    }
+  }
+}

@@ -67,13 +67,6 @@ function Hero() {
             letterSpacing="tight"
           >
             Esperienza, innovazione e tecnologia all'avanguardia
-            {/* <Box
-              as="mark"
-              color={mode("blue.500", "blue.300")}
-              bg="transparent"
-            >
-              tecnologia all'avanguardia
-            </Box> */}
           </Heading>
           <Text
             mt={4}

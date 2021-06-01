@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_button_call_to_actions",
+  "info": {
+    "name": "Call to action",
+    "icon": "mouse-pointer",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

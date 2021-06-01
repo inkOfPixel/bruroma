@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_section_heroes",
+  "info": {
+    "name": "Hero",
+    "icon": "window-maximize",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "callToAction": {
+      "type": "component",
+      "repeatable": true,
+      "component": "button.call-to-action"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    }
+  }
+}
