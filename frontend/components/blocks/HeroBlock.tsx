@@ -8,13 +8,25 @@ import {
   Text,
   useColorModeValue as mode,
 } from "@chakra-ui/react";
+import { STRAPI_URL } from "@config/env";
 import * as React from "react";
-import { BlocksControls, Block, InlineTextarea } from "react-tinacms-inline";
+import {
+  BlocksControls,
+  Block,
+  InlineTextarea,
+  InlineImage,
+} from "react-tinacms-inline";
 import { BlockTemplateData } from "./types";
 
 export type HeroBlockData = BlockTemplateData<{
-  headline?: string;
-  subtext?: string;
+  id: string;
+  headline: Nullable<string>;
+  subtext: Nullable<string>;
+  image: Nullable<{
+    id: string;
+    altText: Nullable<string>;
+    url: string;
+  }>;
 }>;
 
 export interface HeroBlockProps {}
@@ -100,13 +112,32 @@ export function HeroBlock({}: HeroBlockProps) {
           clipPath: { lg: "polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%)" },
         }}
       >
-        <Img
-          height="100%"
-          width="100%"
-          objectFit="cover"
-          src="/images/lasercut.jpeg"
-          alt="Lady working"
-        />
+        <InlineImage
+          name="image.url"
+          uploadDir={() => "/"}
+          parse={(media) => media.id}
+          previewSrc={(src, fieldPath, formValues) => {
+            console.log({ src, fieldPath, formValues });
+            return src;
+          }}
+        >
+          {({ src }) => {
+            console.log("src:", src);
+            let imgSrc: string | undefined = undefined;
+            if (src) {
+              imgSrc = src.startsWith("http") ? src : `${STRAPI_URL}${src}`;
+            }
+            return (
+              <Img
+                height="100%"
+                width="100%"
+                objectFit="cover"
+                src={imgSrc}
+                alt="Lady working"
+              />
+            );
+          }}
+        </InlineImage>
       </Box>
     </Box>
   );

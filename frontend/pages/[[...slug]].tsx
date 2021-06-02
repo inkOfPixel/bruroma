@@ -1,17 +1,26 @@
 import { BlockData } from "@components/blocks";
 import { heroBlock, HeroBlock } from "@components/blocks/HeroBlock";
 import {
+  EditComponentSectionHeroInput,
   GetPages,
   GetPagesQuery,
   GetPagesQueryVariables,
   Maybe,
+  UpdatePage,
+  UpdatePageInput,
 } from "@graphql/generated";
 import { fetchGraphQL } from "@graphql/utils";
 import { DefaultLayout } from "@layouts";
 import { GetStaticPaths, GetStaticProps, PreviewData } from "next";
 import React from "react";
-import { InlineBlocks, InlineForm, InlineText } from "react-tinacms-inline";
-import { useForm, usePlugin, FormOptions } from "tinacms";
+import { InlineBlocks, InlineForm } from "react-tinacms-inline";
+import {
+  useForm,
+  usePlugin,
+  FormOptions,
+  useCMS,
+  ContentCreatorPlugin,
+} from "tinacms";
 
 interface DynamicPageProps {
   path: string[];
@@ -21,9 +30,10 @@ interface DynamicPageProps {
   pageData: PageData;
 }
 
-// type PageData = NonNullable<NonNullable<GetPagesQuery["pages"]>[0]>;
 interface PageData {
+  id: string;
   title?: string;
+  path: string;
   blocks: BlockData[];
 }
 
@@ -32,6 +42,7 @@ export default function DynamicPage({
   locale,
   pageData,
 }: DynamicPageProps) {
+  const cms = useCMS();
   if (pageData == null) {
     return null;
   }
@@ -39,40 +50,72 @@ export default function DynamicPage({
     id: pageData.id,
     label: "Page",
     initialValues: pageData,
-    onSubmit: () => {
-      alert("Saving!");
+    onSubmit: async (values) => {
+      console.log("VALUES", values);
+      const input = getPageInput(values);
+      console.log("INPUT", input);
+      try {
+        const response = await cms.api.strapi.fetchGraphql(UpdatePage, {
+          input,
+        });
+        console.log("RESP", response);
+        if (response.data) {
+          cms.alerts.success("Changes saved!");
+        } else {
+          cms.alerts.error("Error while saving changes");
+        }
+      } catch (error) {
+        console.log(error);
+        cms.alerts.error("Error while saving changes");
+      }
     },
     fields: [],
   };
   const [page, form] = useForm<PageData>(formConfig);
   usePlugin(form);
+  usePlugin(PageCreatorPlugin);
 
   return (
     <InlineForm form={form}>
       <DefaultLayout title="Bruroma">
         <InlineBlocks name="blocks" blocks={HOME_BLOCKS} />
-        {/* {pageData.sections?.map((section) => {
-          if (section == null) {
-            return null;
-          }
-          switch (section.__typename) {
-            case "ComponentSectionHero": {
-              return (
-                <HeroSection
-                  key={section.id}
-                  title={page.title || undefined}
-                  description={section.description || undefined}
-                />
-              );
-            }
-            default:
-              return null;
-          }
-        })} */}
       </DefaultLayout>
     </InlineForm>
   );
 }
+
+const PageCreatorPlugin: ContentCreatorPlugin<{
+  title: string;
+}> = {
+  __type: "content-creator",
+  name: "Add new page",
+  fields: [
+    {
+      label: "Title",
+      name: "title",
+      component: "text",
+      validate(title) {
+        if (!title) return "Required.";
+      },
+    },
+    {
+      label: "Date",
+      name: "date",
+      component: "date",
+      description: "The default will be today.",
+    },
+    {
+      label: "Author",
+      name: "author_name",
+      component: "text",
+      description: "Who wrote this, yo?",
+    },
+  ],
+  onSubmit(values, cms) {
+    // Call functions that create the new blog post. For example:
+    // cms.apis.someBackend.createPost(values);
+  },
+};
 
 const HOME_BLOCKS = {
   /** We will define blocks here later */
@@ -197,8 +240,16 @@ function getPageData(
           case "ComponentSectionHero": {
             return {
               _template: "hero",
-              headline: section.title || undefined,
-              subtext: section.description || undefined,
+              id: section.id,
+              headline: section.title || null,
+              subtext: section.description || null,
+              image: section.image
+                ? {
+                    id: section.image.id,
+                    altText: section.image.alternativeText || null,
+                    url: section.image.url,
+                  }
+                : null,
             };
           }
           default:
@@ -206,9 +257,35 @@ function getPageData(
         }
       }) || [];
     return {
+      id: page.id,
+      path: page.path,
       title: page.title || undefined,
       blocks: filterListNullableItems(blocks),
     };
   }
   return null;
+}
+
+function getPageInput(data: PageData): UpdatePageInput {
+  return {
+    where: { id: data.id },
+    data: {
+      title: data.title,
+      path: data.path,
+      sections: data.blocks.map<EditComponentSectionHeroInput>((block) => {
+        switch (block._template) {
+          case "hero": {
+            return {
+              __typename: "ComponentSectionHero",
+              id: block.id,
+              title: block.headline,
+              description: block.subtext,
+            };
+          }
+          default:
+            throw new Error(`unknown block type "${block._template}"`);
+        }
+      }),
+    },
+  };
 }

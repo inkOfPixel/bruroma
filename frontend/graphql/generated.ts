@@ -1096,6 +1096,22 @@ export type GetPagesQuery = (
   )>>> }
 );
 
+export type UpdatePageMutationVariables = Exact<{
+  input?: Maybe<UpdatePageInput>;
+}>;
+
+
+export type UpdatePageMutation = (
+  { __typename?: 'Mutation' }
+  & { updatePage?: Maybe<(
+    { __typename?: 'updatePagePayload' }
+    & { page?: Maybe<(
+      { __typename?: 'Page' }
+      & Pick<Page, 'id'>
+    )> }
+  )> }
+);
+
 
 export const GetPages = `
     query getPages($where: JSON, $locale: String, $publicationState: PublicationState) {
@@ -1126,6 +1142,15 @@ export const GetPages = `
           url
         }
       }
+    }
+  }
+}
+    `;
+export const UpdatePage = `
+    mutation updatePage($input: updatePageInput) {
+  updatePage(input: $input) {
+    page {
+      id
     }
   }
 }

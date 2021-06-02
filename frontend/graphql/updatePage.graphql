@@ -1,0 +1,7 @@
+mutation updatePage($input: updatePageInput) {
+  updatePage(input: $input) {
+    page {
+      id
+    }
+  }
+}

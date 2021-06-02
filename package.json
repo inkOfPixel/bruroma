@@ -12,7 +12,8 @@
     "dev": "cross-env FORCE_COLOR=1 npm-run-all -l -p dev:*",
     "postinstall": "npm run install:backend && npm run install:frontend",
     "install:backend": "cd backend && npm install",
-    "install:frontend": "cd frontend && npm install"
+    "install:frontend": "cd frontend && npm install",
+    "codegen": "cd frontend && npm run codegen"
   },
   "devDependencies": {
     "cross-env": "7.0.3",
