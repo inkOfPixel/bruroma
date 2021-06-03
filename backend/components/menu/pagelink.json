@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_menu_pagelinks",
+  "info": {
+    "name": "pagelink",
+    "icon": "file"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "page": {
+      "model": "page"
+    }
+  }
+}

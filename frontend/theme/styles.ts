@@ -4,6 +4,7 @@ import { mode } from "@chakra-ui/theme-tools";
 export const styles: ThemeOverride["styles"] = {
   global: (props) => ({
     body: {
+      color: "gray.900",
       background: mode("white", "gray.900")(props),
     },
   }),

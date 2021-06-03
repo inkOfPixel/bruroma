@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_menu_submenus",
+  "info": {
+    "name": "submenu",
+    "icon": "angle-down"
+  },
+  "options": {},
+  "attributes": {
+    "menu": {
+      "model": "menu"
+    }
+  }
+}

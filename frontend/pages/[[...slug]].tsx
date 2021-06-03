@@ -1,26 +1,17 @@
+import { PageData, usePagePlugin } from "@cms/plugins";
 import { BlockData } from "@components/blocks";
-import { heroBlock, HeroBlock } from "@components/blocks/HeroBlock";
+import { heroBlock } from "@components/blocks/HeroBlock";
 import {
-  EditComponentSectionHeroInput,
   GetPages,
   GetPagesQuery,
   GetPagesQueryVariables,
   Maybe,
-  UpdatePage,
-  UpdatePageInput,
 } from "@graphql/generated";
 import { fetchGraphQL } from "@graphql/utils";
 import { DefaultLayout } from "@layouts";
 import { GetStaticPaths, GetStaticProps, PreviewData } from "next";
 import React from "react";
 import { InlineBlocks, InlineForm } from "react-tinacms-inline";
-import {
-  useForm,
-  usePlugin,
-  FormOptions,
-  useCMS,
-  ContentCreatorPlugin,
-} from "tinacms";
 
 interface DynamicPageProps {
   path: string[];
@@ -30,50 +21,11 @@ interface DynamicPageProps {
   pageData: PageData;
 }
 
-interface PageData {
-  id: string;
-  title?: string;
-  path: string;
-  blocks: BlockData[];
-}
-
-export default function DynamicPage({
-  path,
-  locale,
-  pageData,
-}: DynamicPageProps) {
-  const cms = useCMS();
+export default function DynamicPage({ pageData }: DynamicPageProps) {
   if (pageData == null) {
     return null;
   }
-  const formConfig: FormOptions<PageData> = {
-    id: pageData.id,
-    label: "Page",
-    initialValues: pageData,
-    onSubmit: async (values) => {
-      console.log("VALUES", values);
-      const input = getPageInput(values);
-      console.log("INPUT", input);
-      try {
-        const response = await cms.api.strapi.fetchGraphql(UpdatePage, {
-          input,
-        });
-        console.log("RESP", response);
-        if (response.data) {
-          cms.alerts.success("Changes saved!");
-        } else {
-          cms.alerts.error("Error while saving changes");
-        }
-      } catch (error) {
-        console.log(error);
-        cms.alerts.error("Error while saving changes");
-      }
-    },
-    fields: [],
-  };
-  const [page, form] = useForm<PageData>(formConfig);
-  usePlugin(form);
-  usePlugin(PageCreatorPlugin);
+  const [_, form] = usePagePlugin(pageData);
 
   return (
     <InlineForm form={form}>
@@ -83,39 +35,6 @@ export default function DynamicPage({
     </InlineForm>
   );
 }
-
-const PageCreatorPlugin: ContentCreatorPlugin<{
-  title: string;
-}> = {
-  __type: "content-creator",
-  name: "Add new page",
-  fields: [
-    {
-      label: "Title",
-      name: "title",
-      component: "text",
-      validate(title) {
-        if (!title) return "Required.";
-      },
-    },
-    {
-      label: "Date",
-      name: "date",
-      component: "date",
-      description: "The default will be today.",
-    },
-    {
-      label: "Author",
-      name: "author_name",
-      component: "text",
-      description: "Who wrote this, yo?",
-    },
-  ],
-  onSubmit(values, cms) {
-    // Call functions that create the new blog post. For example:
-    // cms.apis.someBackend.createPost(values);
-  },
-};
 
 const HOME_BLOCKS = {
   /** We will define blocks here later */
@@ -264,28 +183,4 @@ function getPageData(
     };
   }
   return null;
-}
-
-function getPageInput(data: PageData): UpdatePageInput {
-  return {
-    where: { id: data.id },
-    data: {
-      title: data.title,
-      path: data.path,
-      sections: data.blocks.map<EditComponentSectionHeroInput>((block) => {
-        switch (block._template) {
-          case "hero": {
-            return {
-              __typename: "ComponentSectionHero",
-              id: block.id,
-              title: block.headline,
-              description: block.subtext,
-            };
-          }
-          default:
-            throw new Error(`unknown block type "${block._template}"`);
-        }
-      }),
-    },
-  };
 }

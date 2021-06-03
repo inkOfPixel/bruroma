@@ -1,4 +1,4 @@
-import { Button, ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { Box, Button, ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { STRAPI_URL } from "@config/env";
 import { theme } from "@theme";
 import Head from "next/head";
@@ -39,7 +39,7 @@ export default function AppProviders({
           <Head>
             <link rel="icon" type="image/x-icon" href="/images/favicon.png" />
           </Head>
-          {children}
+          <Box color="white">{children}</Box>
           <EditButton />
         </ChakraProvider>
       </StrapiProvider>

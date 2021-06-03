@@ -1070,6 +1070,22 @@ export type UpdateUserPayload = {
   user?: Maybe<UsersPermissionsUser>;
 };
 
+export type CreatePageMutationVariables = Exact<{
+  input?: Maybe<CreatePageInput>;
+}>;
+
+
+export type CreatePageMutation = (
+  { __typename?: 'Mutation' }
+  & { createPage?: Maybe<(
+    { __typename?: 'createPagePayload' }
+    & { page?: Maybe<(
+      { __typename?: 'Page' }
+      & Pick<Page, 'id'>
+    )> }
+  )> }
+);
+
 export type GetPagesQueryVariables = Exact<{
   where?: Maybe<Scalars['JSON']>;
   locale?: Maybe<Scalars['String']>;
@@ -1113,6 +1129,15 @@ export type UpdatePageMutation = (
 );
 
 
+export const CreatePage = `
+    mutation createPage($input: createPageInput) {
+  createPage(input: $input) {
+    page {
+      id
+    }
+  }
+}
+    `;
 export const GetPages = `
     query getPages($where: JSON, $locale: String, $publicationState: PublicationState) {
   pages(where: $where, locale: $locale, publicationState: $publicationState) {

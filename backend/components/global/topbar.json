@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_global_topbars",
+  "info": {
+    "name": "topbar",
+    "icon": "minus"
+  },
+  "options": {},
+  "attributes": {
+    "menu": {
+      "model": "menu"
+    }
+  }
+}

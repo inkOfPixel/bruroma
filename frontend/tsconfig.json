@@ -21,6 +21,7 @@
     "paths": {
       "@config/*": ["config/*"],
       "@graphql/*": ["graphql/*"],
+      "@cms/*": ["cms/*"],
       "@layouts": ["layouts"],
       "@layouts/*": ["layouts/*"],
       "@components/*": ["components/*"],
