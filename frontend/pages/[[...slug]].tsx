@@ -53,6 +53,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     >(GetPages, {
       locale,
     });
+    console.log("RAW", localePages);
     if (localePages.pages) {
       return filterListNullableItems(localePages.pages);
     }
@@ -61,6 +62,8 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 
   const allPages = await Promise.all(allPagesRequests);
   const pages = allPages.flat();
+
+  console.log("PAGES", pages);
 
   const paths = pages.map((page) => {
     // Decompose the slug that was saved in Strapi
