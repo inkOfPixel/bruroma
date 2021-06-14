@@ -1,4 +1,4 @@
-import { BlockData } from "@components/blocks";
+import { BlockData } from "@features/page/blocks";
 import {
   CreatePage,
   CreatePageInput,

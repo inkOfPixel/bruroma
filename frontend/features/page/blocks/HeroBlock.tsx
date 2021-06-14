@@ -16,22 +16,34 @@ import {
   InlineTextarea,
   InlineImage,
 } from "react-tinacms-inline";
-import { BlockTemplateData } from "./types";
+import { BlockItemProps, BlockTemplateData } from "./types";
 
 export type HeroBlockData = BlockTemplateData<{
   id: string;
   headline: Nullable<string>;
   subtext: Nullable<string>;
-  image: Nullable<{
-    id: string;
-    altText: Nullable<string>;
-    url: string;
-  }>;
+  image: Nullable<HeroImage>;
 }>;
 
-export interface HeroBlockProps {}
+interface HeroImage {
+  id: string;
+  altText: Nullable<string>;
+  url: string;
+}
 
-export function HeroBlock({}: HeroBlockProps) {
+export interface HeroBlockProps {
+  headline: string;
+  subtext: string;
+  image: Nullable<HeroImage>;
+  isPreview: boolean;
+}
+
+export function HeroBlock({
+  isPreview,
+  headline,
+  subtext,
+  image,
+}: HeroBlockProps) {
   return (
     <Box
       as="section"
@@ -66,7 +78,11 @@ export function HeroBlock({}: HeroBlockProps) {
             fontWeight="extrabold"
             letterSpacing="tight"
           >
-            <InlineTextarea name="headline" focusRing={false} />
+            {isPreview ? (
+              <InlineTextarea name="headline" focusRing={false} />
+            ) : (
+              headline
+            )}
           </Heading>
           <Text
             mt={4}
@@ -74,7 +90,11 @@ export function HeroBlock({}: HeroBlockProps) {
             fontWeight="medium"
             color={mode("gray.600", "gray.400")}
           >
-            <InlineTextarea name="subtext" focusRing={false} />
+            {isPreview ? (
+              <InlineTextarea name="subtext" focusRing={false} />
+            ) : (
+              subtext
+            )}
           </Text>
           <Stack direction={{ base: "column", sm: "row" }} spacing="4" mt="8">
             <Button
@@ -112,43 +132,60 @@ export function HeroBlock({}: HeroBlockProps) {
           clipPath: { lg: "polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%)" },
         }}
       >
-        <InlineImage
-          name="image.url"
-          uploadDir={() => "/"}
-          parse={(media) => media.id}
-          previewSrc={(src, fieldPath, formValues) => {
-            console.log({ src, fieldPath, formValues });
-            return src;
-          }}
-        >
-          {({ src }) => {
-            console.log("src:", src);
-            let imgSrc: string | undefined = undefined;
-            if (src) {
-              imgSrc = src.startsWith("http") ? src : `${STRAPI_URL}${src}`;
-            }
-            return (
-              <Img
-                height="100%"
-                width="100%"
-                objectFit="cover"
-                src={imgSrc}
-                alt="Lady working"
-              />
-            );
-          }}
-        </InlineImage>
+        {isPreview ? (
+          <InlineImage
+            name="image.url"
+            uploadDir={() => "/"}
+            parse={(media) => media.id}
+            previewSrc={(src, fieldPath, formValues) => {
+              console.log({ src, fieldPath, formValues });
+              return src;
+            }}
+          >
+            {({ src }) => {
+              console.log("src:", src);
+              let imgSrc: string | undefined = undefined;
+              if (src) {
+                imgSrc = src.startsWith("http") ? src : `${STRAPI_URL}${src}`;
+              }
+              return (
+                <Img
+                  height="100%"
+                  width="100%"
+                  objectFit="cover"
+                  src={imgSrc}
+                  alt="Lady working"
+                />
+              );
+            }}
+          </InlineImage>
+        ) : image ? (
+          <Img
+            height="100%"
+            width="100%"
+            objectFit="cover"
+            src={`${STRAPI_URL}${image.url}`}
+            alt={image.altText || ""}
+          />
+        ) : null}
       </Box>
     </Box>
   );
 }
 
 export const heroBlock: Block = {
-  Component: ({ index }) => (
-    <BlocksControls index={index} focusRing={{ offset: 0 }} insetControls>
-      <HeroBlock />
-    </BlocksControls>
-  ),
+  Component: ({ index, data, name, ...other }) => {
+    /**
+     * Tina could use some improvements in the types that provides, since Block type does not allow
+     * to customize itemProps, so we need to use this escape hatch
+     */
+    const itemProps: BlockItemProps = other as any;
+    return (
+      <BlocksControls index={index} focusRing={{ offset: 0 }} insetControls>
+        <HeroBlock {...data} isPreview={itemProps.isPreview} />
+      </BlocksControls>
+    );
+  },
   template: {
     label: "Hero",
     defaultItem: {

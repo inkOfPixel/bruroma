@@ -1,6 +1,10 @@
-import { PageData, usePagePlugin } from "@cms/plugins";
-import { BlockData } from "@components/blocks";
-import { heroBlock } from "@components/blocks/HeroBlock";
+import {
+  BlockData,
+  BlockItemProps,
+  PageData,
+  PAGE_BLOCKS,
+  usePagePlugin,
+} from "@features/page";
 import {
   GetPages,
   GetPagesQuery,
@@ -21,25 +25,30 @@ interface DynamicPageProps {
   pageData: PageData;
 }
 
-export default function DynamicPage({ pageData }: DynamicPageProps) {
+export default function DynamicPage({ pageData, preview }: DynamicPageProps) {
   if (pageData == null) {
     return null;
   }
   const [_, form] = usePagePlugin(pageData);
 
+  const itemProps = React.useMemo<BlockItemProps>(() => {
+    return {
+      isPreview: preview,
+    };
+  }, [preview]);
+
   return (
     <InlineForm form={form}>
       <DefaultLayout title="Bruroma">
-        <InlineBlocks name="blocks" blocks={HOME_BLOCKS} />
+        <InlineBlocks
+          name="blocks"
+          blocks={PAGE_BLOCKS}
+          itemProps={itemProps}
+        />
       </DefaultLayout>
     </InlineForm>
   );
 }
-
-const HOME_BLOCKS = {
-  /** We will define blocks here later */
-  hero: heroBlock,
-};
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
   // Get all pages from Strapi

@@ -25,6 +25,7 @@
       "@layouts": ["layouts"],
       "@layouts/*": ["layouts/*"],
       "@components/*": ["components/*"],
+      "@features/*": ["features/*"],
       "@assets/*": ["assets/*"],
       "@theme": ["theme"]
     }
